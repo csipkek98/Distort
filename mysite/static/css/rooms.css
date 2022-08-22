@@ -1,0 +1,68 @@
+.button1 {
+  transition: 0.3s;
+  background-color: #7289da;
+  border: none;
+  color: white;
+  /* padding: 15px 32px; */
+  padding: 1vw 3vw;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  /* font-size: 16px; */
+  font-size: 1.25vw;
+  border-radius: 10px;
+  max-width: 50%;
+  /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); */
+}
+
+.button1:hover{
+  background-color: #bec5dd;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 18vw;
+  height: 10vw;
+  border-radius: 10px;
+  background-color: #424549;
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+/* Add some padding inside the card container */
+.container {
+  display: flex; /* or inline-flex */
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 100px;
+}
+
+.card-conent{
+  width: 10vw;
+}
+
+h2{
+  transition: 0.3s;
+  font-size: 1.75vw;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  [class*="card"] {
+    width: 100%;
+    height: 30vw;
+  }
+  [class*="button1"] {
+    padding: 2vw 6vw;
+    font-size: 5vw;
+  }
+  h2 {
+    font-size: 5vw;
+  }
+}
+
