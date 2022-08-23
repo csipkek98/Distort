@@ -45,9 +45,29 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     async def receive(self, text_data):
         data = json.loads(text_data)
-        message = data['message']
         username = data['username']
         room = data['room']
+        if 'inRoom' in data:
+            user_list = await self.getUserList()
+            if data['inRoom']:
+                if(room not in user_list):
+                    user_list[room] = set()
+                user_list[room].add(username)
+                self.setUserList(user_list)
+            else:
+                user_list[room].remove(username)
+                self.setUserList(user_list)
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    'type': 'actual_user_list',
+                    'user_list':user_list[room],
+                }
+            )
+        else:
+            message = data['message']
+            room = data['room']
+            role = data['super_user']
 
         await self.save_message(username,room,message)
 
