@@ -80,7 +80,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 'room':room,
             }
         )
-        print("sended?")
+
+    async def take_usernames(self, event):
+        boolean = event['build_user_in_room_list']
+
+        await self.send(text_data=json.dumps({
+            'build_user_in_room_list': boolean,
+        }))
 
     async def chat_message(self, event):
         message = event['message']
