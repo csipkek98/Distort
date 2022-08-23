@@ -68,7 +68,19 @@
         }
 
         chatSocket.onclose = function(e){
-            console.log('onclose')
+            alert("Connection lost, redirect to rooms")
+        }
+
+        chatSocket.onopen = function(e){
+            sendUserStateToList(true)
+        }
+
+        function sendUserStateToList(state){
+            chatSocket.send(JSON.stringify({
+                'username': userName,
+                'inRoom': state,
+                'room': roomName
+            }));
         }
 
         //
@@ -79,11 +91,14 @@
             const messageInputDom = document.querySelector("#chat-message-input");
             const message = messageInputDom.value;
 
-            chatSocket.send(JSON.stringify({
-                'message': message,
-                'username': userName,
-                'room': roomName
-            }));
+            if(message.length !== 0){
+                chatSocket.send(JSON.stringify({
+                    'message': message,
+                    'username': userName,
+                    'room': roomName,
+                    'super_user': user_role,
+                }));
+            }
 
             messageInputDom.value = '';
             
