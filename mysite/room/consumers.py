@@ -98,6 +98,14 @@ class ChatConsumer(AsyncWebsocketConsumer):
             'message': message,
             'username': username,
             'room': room,
+            'super_user': role
+        }))
+    
+    async def actual_user_list(self,event):
+        user_list = ",".join(event['user_list'])
+
+        await self.send(text_data=json.dumps({
+            'user_list': user_list,
         }))
 
     @sync_to_async
