@@ -92,6 +92,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         message = event['message']
         username = event['username']
         room = event['room']
+        role = event['super_user']
 
         await self.send(text_data=json.dumps({
             'message': message,
