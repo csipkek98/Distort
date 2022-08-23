@@ -30,9 +30,12 @@
 {% block scripts %}
 {{ room.slug|json_script:"json-roomname" }}
 {{ request.user.username|json_script:"json-username" }}
+{{ request.user.is_superuser|json_script:"json-userrole" }}
     <script>
         const roomName = JSON.parse(document.getElementById('json-roomname').textContent)
         const userName = JSON.parse(document.getElementById('json-username').textContent)
+        const user_role = JSON.parse(document.getElementById('json-userrole').textContent)
+
 
         const chatSocket = new WebSocket(
             'ws://'
