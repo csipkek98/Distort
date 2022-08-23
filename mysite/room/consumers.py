@@ -69,16 +69,17 @@ class ChatConsumer(AsyncWebsocketConsumer):
             room = data['room']
             role = data['super_user']
 
-        await self.save_message(username,room,message)
+            await self.save_message(username,room,message)
 
-        await self.channel_layer.group_send(
-            self.room_group_name,
-            {
-                'type': 'chat_message',
-                'message':message,
-                'username':username,
-                'room':room,
-            }
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    'type': 'chat_message',
+                    'message':message,
+                    'username':username,
+                    'room':room,
+                    'super_user': role,
+                }
         )
 
     async def take_usernames(self, event):
