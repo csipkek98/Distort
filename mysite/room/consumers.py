@@ -30,9 +30,17 @@ class ChatConsumer(AsyncWebsocketConsumer):
         await self.accept()
 
     async def disconnect(self,close_code):
+        self.__userlist[self.room_name].clear()
         await self.channel_layer.group_discard(
             self.room_group_name,
             self.channel_name
+        )
+        await self.channel_layer.group_send(
+            self.room_group_name,
+            {
+            'type': 'take_usernames',
+            'build_user_in_room_list': True,
+            }
         )
 
     async def receive(self, text_data):
