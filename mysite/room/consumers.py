@@ -95,11 +95,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
             if(typing):
                 typing_list[room].add(username)
             else:
-                print(typing_list[room])
                 typing_list[room].remove(username)
-                print(f"User {username} stopped Typing!")
             await self.setTypingList(typing_list)
-            print(await self.getTypingList())
             await self.channel_layer.group_send(
                 self.room_group_name,
                 {
