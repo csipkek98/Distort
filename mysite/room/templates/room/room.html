@@ -6,9 +6,13 @@
 {% block content %}
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/room.css' %}">
+<script type="module" src="{% static 'js/emojiPicker.js' %}"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script type="module" src="https://unpkg.com/emoji-picker-element@1"></script>
 {% endblock %}
 <div class="center">
-    <h1 class="text-3xl lg:text-6xl text-white">{{ room.name }}</h1>
+    <h1>{{ room.name }}</h1>
 </div>
     <div class="text-box">
         <div id="chat-messages">
@@ -30,12 +34,29 @@
             </div>
         </div>
     </div>
-<div>
-    <form method="post" action="." class="flex">
-        <input type="text" name="content" placeholder="Your message.." id="chat-message-input" onkeyup="sendTypingStatus()">
-        <button id="chat-message-submit">Submit</button>
-    </form>
-</div>
+    <div id="typing-text-container">
+        <div id="typing-text">
+
+        </div>
+    </div>
+    <div id="input-form">
+        <form method="post" action="." class="flex">
+            {% csrf_token %}
+            <div class="input-form">
+                <input type="text" name="content" placeholder="Your message.." id="chat-message-input" class="chat-message-input" onkeyup="sendTypingStatus()">
+                <img src="{% static 'images/util/emojis.png' %}" id="emoji-button">
+                <button id="chat-message-submit">Submit</button>
+            </div>
+        </form>
+    </div>
+    
+            <div class="tooltip" role="tooltip" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 29px);" data-popper-placement="top">
+                <emoji-picker></emoji-picker>
+            </div>
+
+
+
+
 
 {% endblock %}
 
@@ -57,30 +78,50 @@
             +'/'
         );
 
+        let timer;
+        const waitTime = 3000;   // Wait time in milliseconds
+        let typingSended = false; 
 
         chatSocket.onmessage = function(e){
             const data = JSON.parse(e.data);
             if('build_user_in_room_list' in data){
                 sendUserStateToList(true)
+            }else if('user_list' in data){
+                build_user_list(data)
+            }else if('typing_list' in data){
+                update_currently_typing_list(data)
             }else{
-                if ('user_list' in data){
-                    build_user_list(data)
-                }
-                else{
-                    if (data.message){
-                        div = build_message_div(data)
-                        document.querySelector('#chat-messages').innerHTML += div;
-                        scrollToBottom();
-                    }
+                if (data.message){
+                    div = build_message_div(data)
+                    document.querySelector('#chat-messages').innerHTML += div;
+                    scrollToBottom();
                 }
             }
+        }
             
+        function update_currently_typing_list(data){
+            typing_list = data["typing_list"]
+            users = typing_list.split(",")
+            if(userName == users || users[0] === ""){
+                users = ""
+            }else if(users.includes(userName)){
+                const index = users.indexOf(userName);
+                users.splice(index, 1)
+            }
+            if(users.length > 3){
+                div = users[0]+", "+users[1]+" and several people typing..."
+                document.getElementById('typing-text').innerText = div
+            }else if(users.length < 4 && users.length > 0){
+                div = users.join(", ")+" is typing..."
+                document.getElementById('typing-text').innerText = div
+            }else{
+                document.getElementById('typing-text').innerText = ""
+            }
         }
 
         function build_user_list(data){
             div = ""
             users = data["user_list"].split(",")
-            console.log(users)
             if(users.length <= 1){
                 div +="<div><i>"+data["user_list"]+"</i></div>"
             }else{
@@ -127,6 +168,7 @@
             e.preventDefault();
 
             const messageInputDom = document.querySelector("#chat-message-input");
+            const emoji_menu = document.querySelector(".tooltip")
             const message = messageInputDom.value;
 
             if(message.length !== 0){
@@ -137,6 +179,7 @@
                     'super_user': user_role,
                 }));
             }
+            emoji_menu.classList.remove('shown')
 
             messageInputDom.value = '';
             
@@ -150,14 +193,29 @@
             objDiv.scrollTop = objDiv.scrollHeight;
         }
 
-        //function sendTypingStatus(e){
-        //    alert("Typing")
-        //    chatSocket.send(JSON.stringify({
-        //        'username': userName,
-        //        'typing': true
-        //    }));
-        //}
-
         scrollToBottom();
+
+        async function sendTypingStatus(e){
+            clearTimeout(timer)
+            
+            timer = setTimeout(() => {
+                chatSocket.send(JSON.stringify({
+                    'username': userName,
+                     'typing': false,
+                     'room': roomName
+                 }));
+                typingSended = false;
+                
+            }, waitTime);
+            if(!typingSended){
+                typingSended = true;
+                chatSocket.send(JSON.stringify({
+                    'username': userName,
+                     'typing': true,
+                     'room': roomName
+                 }));
+            }
+            
+        }
     </script>
 {% endblock %}
