@@ -6,6 +6,10 @@
 {% block content %}
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/room.css' %}">
+<script type="module" src="{% static 'js/emojiPicker.js' %}"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script type="module" src="https://unpkg.com/emoji-picker-element@1"></script>
 {% endblock %}
 <div class="center">
     <h1>{{ room.name }}</h1>
