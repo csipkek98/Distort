@@ -37,10 +37,22 @@
     </div>
     <div id="input-form">
         <form method="post" action="." class="flex">
-        <input type="text" name="content" placeholder="Your message.." id="chat-message-input" onkeyup="sendTypingStatus()">
-        <button id="chat-message-submit">Submit</button>
-    </form>
-</div>
+            {% csrf_token %}
+            <div class="input-form">
+                <input type="text" name="content" placeholder="Your message.." id="chat-message-input" class="chat-message-input" onkeyup="sendTypingStatus()">
+                <img src="{% static 'images/util/emojis.png' %}" id="emoji-button">
+                <button id="chat-message-submit">Submit</button>
+            </div>
+        </form>
+    </div>
+    
+            <div class="tooltip" role="tooltip" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 29px);" data-popper-placement="top">
+                <emoji-picker></emoji-picker>
+            </div>
+
+
+
+
 
 {% endblock %}
 
