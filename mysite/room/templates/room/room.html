@@ -57,6 +57,9 @@
             +'/'
         );
 
+        let timer;
+        const waitTime = 3000;   // Wait time in milliseconds
+        let typingSended = false; 
 
         chatSocket.onmessage = function(e){
             const data = JSON.parse(e.data);
@@ -65,16 +68,35 @@
             }else{
                 if ('user_list' in data){
                     build_user_list(data)
-                }
-                else{
-                    if (data.message){
-                        div = build_message_div(data)
-                        document.querySelector('#chat-messages').innerHTML += div;
-                        scrollToBottom();
-                    }
+            }else if('typing_list' in data){
+                update_currently_typing_list(data)
+            }else{
+                if (data.message){
+                    div = build_message_div(data)
+                    document.querySelector('#chat-messages').innerHTML += div;
+                    scrollToBottom();
                 }
             }
+        }
             
+        function update_currently_typing_list(data){
+            typing_list = data["typing_list"]
+            users = typing_list.split(",")
+            if(userName == users || users[0] === ""){
+                users = ""
+            }else if(users.includes(userName)){
+                const index = users.indexOf(userName);
+                users.splice(index, 1)
+            }
+            if(users.length > 3){
+                div = users[0]+", "+users[1]+" and several people typing..."
+                document.getElementById('typing-text').innerText = div
+            }else if(users.length < 4 && users.length > 0){
+                div = users.join(", ")+" is typing..."
+                document.getElementById('typing-text').innerText = div
+            }else{
+                document.getElementById('typing-text').innerText = ""
+            }
         }
 
         function build_user_list(data){
@@ -150,14 +172,29 @@
             objDiv.scrollTop = objDiv.scrollHeight;
         }
 
-        //function sendTypingStatus(e){
-        //    alert("Typing")
-        //    chatSocket.send(JSON.stringify({
-        //        'username': userName,
-        //        'typing': true
-        //    }));
-        //}
+        scrollToBottom();
 
+        async function sendTypingStatus(e){
+            clearTimeout(timer)
+            
+            timer = setTimeout(() => {
+                chatSocket.send(JSON.stringify({
+                    'username': userName,
+                     'typing': false,
+                     'room': roomName
+                 }));
+                typingSended = false;
+                
+            }, waitTime);
+            if(!typingSended){
+                typingSended = true;
+                chatSocket.send(JSON.stringify({
+                    'username': userName,
+                     'typing': true,
+                     'room': roomName
+                 }));
+            }
+            
         scrollToBottom();
     </script>
 {% endblock %}
