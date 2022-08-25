@@ -38,7 +38,7 @@
 #chat-message-input{
     border-radius: 10px;
     height: 30px;
-    margin-left: calc(var(--chat-input-margin) - 80px);
+    
     width: var(--chat-input-width);
 
 }
@@ -81,4 +81,36 @@
     flex-direction: column;
     flex-wrap: wrap;
     margin-left: 5px;
+}
+
+.misc-buttons > img{
+    width: 32px;
+    height: 32px;
+    position: absolute; 
+    top: 2px; 
+    right: 5px
+}
+
+.input-form{
+    margin-left: calc(var(--chat-input-margin) - 80px);
+    position: relative;
+}
+
+#typing-text-container{
+    margin-left: calc(var(--chat-input-margin) - 70px);
+    width: var(--chat-input-width);
+    height: 22px;
+    /* border-radius: 10px;
+    background-color: black; */
+}
+#emoji-button{
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    cursor: pointer;
+    transform: translateX(-38px) translateY(4.5px);
+}
+
+.tooltip:not(.shown) {
+    display: none;
 }
