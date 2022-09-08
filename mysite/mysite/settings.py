@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'channels',
     'core',
     'room',
+    'profile',
 ]
 
 MIDDLEWARE = [
@@ -63,7 +64,10 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+                os.path.join(BASE_DIR, 'userprofile', 'templates', 'userprofile'),
+                os.path.join(BASE_DIR, 'room', 'templates', 'room'),
+                os.path.join(BASE_DIR, 'core', 'templates', 'core'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
