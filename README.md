@@ -20,10 +20,10 @@ Implemented:<br/>
   ✅ Responsive CSS design for PC and mobile devices<br/>
   ✅ Currently typing message, when somebody typing<br/>
   ✅ Emoticon menu for messaging<br/>
+  ✅ User profile page<br/>
   ✅ Cool looking CSS design 😎
   
 Not implemented <b> YET </b>:<br/>
 
-  ❌ User profile page<br/>
   ❌ Admin menu for moderation<br/>
   ❌ Delete message button for Admin role in chat rooms<br/>
