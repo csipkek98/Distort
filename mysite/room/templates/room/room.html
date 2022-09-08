@@ -19,9 +19,9 @@
             {% for message in messages %}
                 <div class="">
                     {% if message.user.is_superuser %}
-                    <b><p class="chat-message-name admin">{{ message.user.username }}:</p></b>
+                    <b><p class="chat-message-name admin"><a href='/profile/{{ message.user.username }}'>{{ message.user.username }}</a>:</p></b>
                     {% else %}
-                    <b><p class="chat-message-name user">{{ message.user.username }}:</p></b>
+                    <b><p class="chat-message-name user"><a href='/profile/{{ message.user.username }}'>{{ message.user.username }}</a>:</p></b>
                     {% endif %}
                     <p class="chat-message-text">{{ message.content }}</p>
                 </div>
@@ -137,11 +137,12 @@
         function build_message_div(data){
             let html = '<div class="message"">';
                         if (data.super_user){
-                            html+='<b><p class="chat-message-name admin">' + data.username + ':</p></b>'
+                            html+='<b><p class="chat-message-name admin"><a href="/profile/'+ data.username +'">' + data.username + '</a>:</p></b>'
+                            console.log(html)
                         }else{
-                            html+='<b><p class="chat-message-name user">' + data.username + ':</p></b>'
+                            html+='<b><p class="chat-message-name user"><a href="/profile/'+ data.username +'">' + data.username + '</a>:</p></b>'
                         }
-                    html+='<p class="chat-message-text">' + data.message + '</p>';
+                    html+='<p class="chat-message-text">' + data.message.replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</p>'; // replace for "<>" to eliminate HTML injection
                     html+='</div>';
                     return html
         }
@@ -170,6 +171,7 @@
             const messageInputDom = document.querySelector("#chat-message-input");
             const emoji_menu = document.querySelector(".tooltip")
             const message = messageInputDom.value;
+            message.replace(/</g, "&lt;").replace(/>/g, "&gt;")
 
             if(message.length !== 0){
                 chatSocket.send(JSON.stringify({
