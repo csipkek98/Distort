@@ -1,0 +1,69 @@
+h1{
+    margin-left: 1vw;
+    margin-bottom: 6vh;
+}
+#profile-base{
+    background-color: rgba(83, 83, 83, 0.5);
+    overflow: hidden;
+}
+
+#profile-picture{
+    border: 3px solid rgb(255, 255, 255);
+    
+    float:left; /* add this */
+    margin-left: 3vw;
+    margin-top: 1vw;
+}
+
+#profile-picture>img{
+    width: 150px;
+    height: 150px;
+}
+
+#profile-left{
+
+    float:left; /* add this */
+    margin-left: 3vw;
+    width: 35vw;
+}
+
+#profile-right{
+
+    margin-left: 1vw;
+    float:left; /* add this */
+}
+
+[id*="div-"] {
+    margin-bottom: 1vw;
+}
+
+[id*="title-"] {
+
+    font-size: 32px;
+}
+
+[id*="value-"] {
+
+    font-size: 24px;
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    #profil-base {
+        overflow: unset;
+    }
+    #profile-picture{
+        margin-top: 2vh;
+        margin-left: 25vw;
+        margin-right: 100vw;
+    }
+    #profile-left{
+        margin-left: 25vw;
+        width: 35vw;
+    }
+    #profile-right{
+        margin-left: 25vw;
+        width: 35vw;
+    }
+  }
+

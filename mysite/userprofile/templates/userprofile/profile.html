@@ -1,0 +1,65 @@
+{% extends 'core/base.html' %}
+{% load static%}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1>User profile page</h1>
+    <div id="profile-base">
+        <div id="profile-picture">
+            <img src="{% static 'images/emoticons/monkaS.png' %}">
+        </div>
+        <div id="profile-left">
+            <div id="div-username">
+                <b id="title-username">Username: </b><div id="value-username">{{user.username}}</div>
+            </div>
+            {% if user.email == "" %}
+            <div id="div-email">
+                <b id="title-email">Email: </b><div id="value-email">-</div>
+            </div>
+            {% else %}
+            <div id="div-email">
+                <b id="title-email">Email: </b><div id="value-email">{{user.email}}</div>
+            </div>
+            {% endif %}
+            <div id="div-admin">
+                <b id="title-admin">Staff: </b>
+                {% if user.is_staff == True %}
+                <div id="value-admin">✅</div>
+                {% else %}
+                <div id="value-admin">❌</div>
+                {% endif %}
+            </div>
+        </div>
+        <div id="profile-right">
+            {% if user.first_name == "" %}
+            <div id="div-firstname">
+                <b id="title-firstname">Firstname: </b><div id="value-firstname">-</div>
+            </div>
+            {% else %}
+            <div id="div-firstname">
+                <b id="title-firstname">Firstname: </b><div id="value-firstname">{{user.first_name}}</div>
+            </div>
+            {% endif %}
+            {% if user.last_name == "" %}
+            <div id="div-lastname">
+                <b id="title-lastname">Lastname: </b><div id="value-lastname">-</div>
+            </div>
+            {% else %}
+            <div id="div-lastname">
+                <b id="title-lastname">Lastname: </b><div id="value-lastname">{{user.last_name}}</div>
+            </div>
+            {% endif %}
+            <div id="div-admin">
+                <b id="title-admin">Admin: </b>
+                {% if user.is_superuser == True %}
+                <div id="value-admin">✅</div>
+                {% else %}
+                <div id="value-admin">❌</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
