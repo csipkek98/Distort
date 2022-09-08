@@ -114,3 +114,8 @@
 .tooltip:not(.shown) {
     display: none;
 }
+
+.chat-message-name >a{
+    color: inherit;
+    text-decoration: none;
+}
