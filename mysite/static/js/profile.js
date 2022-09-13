@@ -5,15 +5,17 @@ const profile_picture = document.getElementById("profile-picture")
 const username = document.getElementById("value-username").innerText
 const email = document.getElementById("value-email").innerText
 const self_profile = cookie_username ==  username
+const no_email = email == "-"
 
-if (self_profile && email == "-"){
+
+if (self_profile && no_email){
     let div = build_missing_error_element()
     base.insertBefore(div, profile_picture)
     document.getElementById("title-email").innerHTML = "<b id='warning-info'>❗<span class='tooltip'>Mandatory if you forget your password</span></b> Email: "
-    init_hide_error()
+    init_hide_error_button()
 }
 
-function init_hide_error(){
+function init_hide_error_button(){
     const cross = document.getElementById("email-error-x")
     cross.addEventListener("click", (e) =>{
         e.target.closest("#email-error").remove()
