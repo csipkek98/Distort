@@ -19,6 +19,7 @@
             <div id="div-email">
                 <b id="title-email">Email: </b><div id="value-email">-</div>
             </div>
+            
             {% else %}
             <div id="div-email">
                 <b id="title-email">Email: </b><div id="value-email">{{user.email}}</div>
@@ -62,4 +63,9 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block scripts %}
+{{ request.user.username|json_script:"json-username" }}
+<script type="module" src="{% static 'js/profile.js' %}"></script>
 {% endblock %}
