@@ -2,6 +2,8 @@
 
 This Project is an online chat application to socialize online with others (Friends, family.. etc.)
 
+Current url for preview purposes: http://distort.sytes.net
+
 ## 🔧 The project use the following technologies:
   - Django
   - Jinja
