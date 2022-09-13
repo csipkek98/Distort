@@ -46,6 +46,41 @@ h1{
 
     font-size: 24px;
 }
+#email-error{
+    width: 100%;
+    background-color: rgb(219, 59, 59);
+}
+#email-error-text{
+    margin-left: 2vw;
+}
+#email-error-x{
+    background-color: white;
+    float: right;
+    cursor: pointer;
+}
+#warning-info{
+    cursor: help;
+}
+
+#warning-info .tooltip{
+    visibility: hidden;
+    background-color: black;
+    font-size: 20px;
+    opacity: 90%;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 5px;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    transform: translateX(0px) translateY(-25px);
+  }
+
+  #warning-info:hover .tooltip {
+    visibility: visible;
+  }
 
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
