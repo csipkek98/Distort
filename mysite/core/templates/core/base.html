@@ -31,6 +31,11 @@
             {% endif %}
             <div class="topnav-right">
                 {% if request.user.is_authenticated %}
+                {% if request.user.email == "" %}
+                <a href='/profile/{{ request.user.username }}'>Profile ❗</a>
+                {% else %}
+                <a href='/profile/{{ request.user.username }}'>Profile</a>
+                {% endif %}
                 <a href="/rooms/"class=""> Rooms </a>
                 <a href="/logout/" class="">Logout</a>
                 

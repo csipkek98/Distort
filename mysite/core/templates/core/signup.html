@@ -18,6 +18,11 @@
         <input type="text" name="username" placeholder="Username">
     </div>
     <div class="mb-5">
+        <label for="email">Email</label>
+    <input type="email" placeholder="Email" name="email">
+    </div>
+    
+    <div class="mb-5">
         <label class="text-white">Password</label>
         <input type="password" name="password1" placeholder="Password">
     </div>
@@ -36,7 +41,7 @@
         {%endfor%}
     {%endif%}
 
-    <button>Regsiter</button>
-    <a id="redirect" href="/login/">Not registered yet? click here!</a>
+    <button>Register</button>
+    <a id="redirect" href="/login/">Already registered? Click here!</a>
 </form>
 {% endblock %}
