@@ -11,9 +11,8 @@ const no_email = user_email == "-"
 let APIbody = ""
 
 if (self_profile){
-    place_profile_button("edit-profile-button", "edit")
+    place_profile_button("edit-profile-button", "Edit")
     init_edit_button()
-    // place_profile_button("save-profile-button", "save") 
 }
 
 if (self_profile && no_email){
@@ -58,7 +57,7 @@ function init_edit_button(){
             }
             
         }
-        place_profile_button("save-profile-button", "save")
+        place_profile_button("save-profile-button", "Save")
         init_save_button()
     })
 }
