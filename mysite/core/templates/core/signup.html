@@ -9,7 +9,7 @@
 
 {% block content %}
 
-<form method="post" action=".">
+<form method="post" action="." onsubmit="validate(this)">
     {% csrf_token %}
     <h3>Register</h3>
     <div class="mb-5">
@@ -44,4 +44,37 @@
     <button>Register</button>
     <a id="redirect" href="/login/">Already registered? Click here!</a>
 </form>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        function validate(form){
+            var username_regex = /^[a-zA-Z0-9]{4,20}$/g;
+            var email_regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+            var username = form.querySelector('[name=username]');
+            var email = form.querySelector('[name=email]');
+    
+            if (username_regex.test(username.value) == false) {
+                event.preventDefault();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid Username',
+                    text: "Your username must be between 4-20 character long and can't contain special characters!",
+                  })
+                username.focus();
+                return false;
+            }
+    
+            if (email_regex.test(email.value) == false) {
+                event.preventDefault();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid Email',
+                    text: "Your email is not in the correct format, please try again!",
+                  })
+                email.focus();
+                return false;
+            }
+        }
+    </script>
 {% endblock %}
