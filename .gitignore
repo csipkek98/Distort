@@ -1,2 +1,7 @@
 venv/
-mysite/node_modules/
+mynodeenv/
+node_modules/
+*.pyc
+package-lock.json
+package.json
+*-39.pyc
