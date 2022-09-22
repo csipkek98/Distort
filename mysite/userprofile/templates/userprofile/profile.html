@@ -10,7 +10,7 @@
 {% block content %}
 <h1>User profile page</h1>
 <div id="button-container">
-    <a id="change-password-button" href="/password/">change password</a>
+    <a id="change-password-button" href="/password/">Change password</a>
 </div>
     <div id="profile-base">
         <div id="profile-picture">
@@ -42,20 +42,20 @@
         <div id="profile-right">
             {% if user.first_name == "" %}
             <div id="div-firstname">
-                <b id="title-firstname">Firstname: </b><div id="value-firstname">-</div>
+                <b id="title-firstname">First name: </b><div id="value-firstname">-</div>
             </div>
             {% else %}
             <div id="div-firstname">
-                <b id="title-firstname">Firstname: </b><div id="value-firstname">{{user.first_name}}</div>
+                <b id="title-firstname">First name: </b><div id="value-firstname">{{user.first_name}}</div>
             </div>
             {% endif %}
             {% if user.last_name == "" %}
             <div id="div-lastname">
-                <b id="title-lastname">Lastname: </b><div id="value-lastname">-</div>
+                <b id="title-lastname">Last name: </b><div id="value-lastname">-</div>
             </div>
             {% else %}
             <div id="div-lastname">
-                <b id="title-lastname">Lastname: </b><div id="value-lastname">{{user.last_name}}</div>
+                <b id="title-lastname">Last name: </b><div id="value-lastname">{{user.last_name}}</div>
             </div>
             {% endif %}
             <div id="div-admin">
