@@ -25,12 +25,12 @@
                 <b id="title-email">Email: </b><div id="value-email">{{user.email}}</div>
             </div>
             {% endif %}
-            <div id="div-admin">
-                <b id="title-admin">Staff: </b>
+            <div id="div-staff">
+                <b id="title-staff">Staff: </b>
                 {% if user.is_staff == True %}
-                <div id="value-admin">✅</div>
+                <div id="value-staff">✅</div>
                 {% else %}
-                <div id="value-admin">❌</div>
+                <div id="value-staff">❌</div>
                 {% endif %}
             </div>
         </div>
