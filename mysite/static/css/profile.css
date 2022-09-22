@@ -88,11 +88,11 @@ h1{
     color: white;
     transition-duration: 0.4s;
     border-radius: 2px;
-    margin-bottom: 1vh;
     margin-left: 0.2vw;
     border: 0px solid black;
     padding-left: 10px;
     padding-right: 10px;
+    cursor: pointer;
 }
 
 #edit-profile-button:hover {
@@ -106,9 +106,9 @@ h1{
     color: white;
     transition-duration: 0.4s;
     border-radius: 2px;
-    margin-bottom: 1vh;
     margin-left: 0.2vw;
     border: 0px solid black;
+    cursor: pointer;
 }
 
 #save-profile-button:hover{
@@ -117,22 +117,28 @@ h1{
 }
 
 #change-password-button{
-    font-size: 20px;
+    font-size:  18px;
     background-color: #7289da;
     color: white;
     transition-duration: 0.4s;
     border-radius: 2px;
-    margin-bottom: 1vh;
     margin-left: 0.2vw;
     border: 0px solid black;
     padding-left: 10px;
     padding-right: 10px;
     text-decoration: none;
+    cursor: pointer;
 }
 
 #change-password-button:hover{
     background-color: rgb(226, 226, 226);
     color: black;
+}
+
+#button-container{
+    background-color: rgba(128, 128, 128, 0.5);
+    border: 1px solid rgb(68, 68, 68);
+    padding: 10px;
 }
 
 @media only screen and (max-width: 768px) {
