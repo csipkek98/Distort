@@ -22,7 +22,7 @@
     <body>
         <div class="topnav">
             <div>
-                <a href="/" class="active">Home</a>
+                <a id="home-button" href="/" class="active">Home</a>
             </div>
             {% if request.user.is_authenticated %}
             <div class="topnav-text-left">
@@ -32,17 +32,17 @@
             <div class="topnav-right">
                 {% if request.user.is_authenticated %}
                 {% if request.user.email == "" %}
-                <a href='/profile/{{ request.user.username }}'>Profile ❗</a>
+                <a id="profile-button" href='/profile/{{ request.user.username }}'>Profile ❗</a>
                 {% else %}
-                <a href='/profile/{{ request.user.username }}'>Profile</a>
+                <a id="profile-button" href='/profile/{{ request.user.username }}'>Profile</a>
                 {% endif %}
-                <a href="/rooms/"class=""> Rooms </a>
-                <a href="/logout/" class="">Logout</a>
+                <a id="rooms-button" href="/rooms/"class=""> Rooms </a>
+                <a id="logout-button" href="/logout/" class="">Logout</a>
                 
                 {% else %}
                 
-                <a href="/login/" class="">Login</a>
-                <a href="/register/" class="">Register</a>
+                <a id="login-button" href="/login/" class="">Login</a>
+                <a id="register-button" href="/register/" class="">Register</a>
                 {% endif %}
             </div>
         </div>

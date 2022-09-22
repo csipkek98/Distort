@@ -82,6 +82,59 @@ h1{
     visibility: visible;
   }
 
+#edit-profile-button{
+    font-size: 20px;
+    background-color: #7289da;
+    color: white;
+    transition-duration: 0.4s;
+    border-radius: 2px;
+    margin-bottom: 1vh;
+    margin-left: 0.2vw;
+    border: 0px solid black;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#edit-profile-button:hover {
+    background-color: rgb(226, 226, 226);
+    color: black;
+  }
+
+#save-profile-button{
+    font-size: 20px;
+    background-color: green;
+    color: white;
+    transition-duration: 0.4s;
+    border-radius: 2px;
+    margin-bottom: 1vh;
+    margin-left: 0.2vw;
+    border: 0px solid black;
+}
+
+#save-profile-button:hover{
+    background-color: rgb(226, 226, 226);
+    color: black;
+}
+
+#change-password-button{
+    font-size: 20px;
+    background-color: #7289da;
+    color: white;
+    transition-duration: 0.4s;
+    border-radius: 2px;
+    margin-bottom: 1vh;
+    margin-left: 0.2vw;
+    border: 0px solid black;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-decoration: none;
+}
+
+#change-password-button:hover{
+    background-color: rgb(226, 226, 226);
+    color: black;
+}
+
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
     #profil-base {

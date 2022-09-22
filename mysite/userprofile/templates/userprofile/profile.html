@@ -3,10 +3,15 @@
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
 <h1>User profile page</h1>
+<div id="button-container">
+    <a id="change-password-button" href="/password/">change password</a>
+</div>
     <div id="profile-base">
         <div id="profile-picture">
             <img src="{% static 'images/emoticons/monkaS.png' %}">
@@ -25,12 +30,12 @@
                 <b id="title-email">Email: </b><div id="value-email">{{user.email}}</div>
             </div>
             {% endif %}
-            <div id="div-admin">
-                <b id="title-admin">Staff: </b>
+            <div id="div-staff">
+                <b id="title-staff">Staff: </b>
                 {% if user.is_staff == True %}
-                <div id="value-admin">✅</div>
+                <div id="value-staff">✅</div>
                 {% else %}
-                <div id="value-admin">❌</div>
+                <div id="value-staff">❌</div>
                 {% endif %}
             </div>
         </div>

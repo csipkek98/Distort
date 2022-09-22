@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'compressor',
+    'compressor_toolkit',
     'channels',
     'core',
     'room',
@@ -60,6 +62,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'mysite.urls'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 TEMPLATES = [
     {
@@ -135,13 +139,34 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
+    ('node_modules', os.path.join(BASE_DIR, 'node_modules/')),
 ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+COMPRESS_CSS_FILTERS = [
+    'compressor.filters.css_default.CssAbsoluteFilter',
+    'compressor.filters.cssmin.CSSMinFilter',
+    'compressor.filters.template.TemplateFilter'
+]
+COMPRESS_JS_FILTERS = [
+    'compressor.filters.jsmin.JSMinFilter',
+]
+COMPRESS_PRECOMPILERS = (
+    ('module', 'compressor_toolkit.precompilers.ES6Compiler'),
+    ('css', 'compressor_toolkit.precompilers.SCSSCompiler'),
+)
+COMPRESS_ENABLED = True
+
+STATICFILES_FINDERS = (
+    'compressor.finders.CompressorFinder',
+)
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
