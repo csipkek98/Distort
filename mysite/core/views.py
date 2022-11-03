@@ -77,8 +77,14 @@ def password_reset_request(request):
                     except BadHeaderError:
                         log_message_error(f"Email sending failed because of invalid header to {user.username}!")
                         return HttpResponse('Invalid header found.')
-                    print("success!")
+                    except Exception as ex:
+
+                        template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+                        message = template.format(type(ex).__name__, ex.args)
+                        log_message_error(f"Email sending failed for the following reason:\n"+message)
                     return redirect ("/password_reset/done/")
+            else:
+                return redirect ("/password_reset/done/")
     password_reset_form = PasswordResetForm()
     return render(request=request, template_name="core/password/password_reset.html", context={"password_reset_form":password_reset_form})
 
