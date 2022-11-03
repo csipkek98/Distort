@@ -50,19 +50,15 @@ def change_password(request):
     })
 
 def password_reset_request(request):
-    print("Password reset function")
     if request.method == "POST":
-        print("POST METHOD")
         password_reset_form = PasswordResetForm(request.POST)
         if password_reset_form.is_valid():
-            print("VALID")
             data = password_reset_form.cleaned_data['email']
             associated_users = User.objects.filter(Q(email=data))
             if associated_users.exists():
                 for user in associated_users:
                     subject = "Password Reset Requested"
                     email_template_name = "core/password/password_reset_email.txt"
-                    print("I'm here!")
                     c = {
                     "email":user.email,
                     'domain':'127.0.0.1:8000',
