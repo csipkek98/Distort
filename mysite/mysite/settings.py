@@ -1,4 +1,5 @@
 import os
+import logger
 """
 Django settings for mysite project.
 
