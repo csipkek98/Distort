@@ -170,4 +170,35 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = 'smtp.freemail.hu'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+try:
+    import os
+
+    main_path = os.path.abspath(__file__ + "/../../")
+    file_path = os.path.join(main_path, 'email_auth.txt')
+    logger.log_message_info("Got file path!")
+
+    print(file_path)
+    logger.log_message_info("Opening email_auth.txt ..")
+    email_auth = open(file_path, "r")
+    logger.log_message_info("Opened successfully")
+    for line in email_auth:
+        data = line.split("=")
+        if data[0] == "USERNAME":
+            EMAIL_HOST_USER = data[1].strip("\n")
+        elif data[0] == "PASSWORD":
+            EMAIL_HOST_PASSWORD = data[1].strip("\n")
+        else:
+            logger.log_message_info(f"Unknown or not handled input in 'email_auth.txt' as '{data[0]}'")
+except:
+    logger.log_message_error("No file found with name 'email_auth.txt', please create one and fill it with the necessary data!")
+
+logger.log_message_info("Server successfully started/restarted!")
+
+SECURE_CROSS_ORIGIN_OPENER_POLICY = None
