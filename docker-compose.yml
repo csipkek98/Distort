@@ -1,0 +1,8 @@
+version: '3.11'
+
+services:
+  django:
+    image: django-docker:0.0.1
+    build: .
+    ports:
+      - "80:80"
