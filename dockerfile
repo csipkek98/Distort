@@ -12,4 +12,4 @@ COPY . .
 
 EXPOSE 80
 
-CMD ["python3","mysite/manage.py","runserver","0.0.0.0:80"]
+CMD ["python3","mysite/manage.py","runserver","172.20.96.1:80"]
